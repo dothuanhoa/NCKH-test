@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Submission - C++ Online Judge</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.min.css">
+    <link rel="stylesheet" href="code-student.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Hệ thống nộp bài lập trình</h1>
+        <div id="problemInfo"></div>
+        <form id="submitForm" autocomplete="off" style="display:none;">
+            <div class="actions">
+                <div>
+                    <label for="language">Ngôn ngữ:</label>
+                    <select id="language" name="language">
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="csharp">C#</option>
+                    </select>
+                </div>
+                <button type="submit">Nộp bài</button>
+            </div>
+            <div style="margin-top:16px;">
+                <label for="editor">Mã nguồn:</label>
+                <div id="editor" style="height:300px;border:1px solid #ccc;"></div>
+            </div>
+            <div id="result" style="margin-top:16px;white-space:pre-line;color:blue"></div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+    <script src="code-student.js"></script>
+</body>
+
+</html>

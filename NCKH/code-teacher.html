@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý bài tập lập trình - Giáo viên</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quản lý bài tập lập trình</h1>
+        <form id="problemForm" autocomplete="off">
+            <label for="title">Tên bài tập:</label>
+            <input type="text" id="title" name="title" style="width:100%;margin-bottom:12px;" required>
+            <label for="description">Mô tả đề bài:</label>
+            <textarea id="description" name="description" rows="4" style="width:100%;margin-bottom:12px;"
+                required></textarea>
+            <label for="problemLanguage">Ngôn ngữ:</label>
+            <select id="problemLanguage" name="problemLanguage" style="width:100%;margin-bottom:12px;">
+                <option value="cpp">C++</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+            </select>
+            <div id="testcases">
+                <label>Test case:</label>
+                <div class="testcase-group">
+                    <input type="text" placeholder="Input" class="tc-input">
+                    <input type="text" placeholder="Expected Output" class="tc-output">
+                </div>
+            </div>
+            <button type="button" class="add-testcase-btn" id="addTestcaseBtn">+ Thêm test case</button>
+            <button type="submit">Tạo bài tập</button>
+        </form>
+        <div class="problem-list" id="problemList">
+            <h2>Danh sách bài tập đã tạo</h2>
+            <div id="problems"></div>
+            <div id="editProblemSection" style="display:none; margin-top:32px;"></div>
+        </div>
+        <div id="submissionsSection" style="display:none;">
+            <h2>Kết quả nộp bài của sinh viên</h2>
+            <table class="submissions-table" id="submissionsTable">
+                <thead>
+                    <tr>
+                        <th>Sinh viên</th>
+                        <th>Bài tập</th>
+                        <th>Điểm</th>
+                        <th>Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="code-teacher.js"></script>
+</body>
+
+</html>
