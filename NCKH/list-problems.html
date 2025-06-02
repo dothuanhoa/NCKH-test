@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách đề thi</title>
+    <link rel="stylesheet" href="code-student.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Danh sách đề thi</h1>
+        <table id="problemsTable" border="1" cellpadding="8" style="width:100%">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên đề</th>
+                    <th>Mô tả</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+        async function loadProblems() {
+            const res = await fetch('api.php?action=get_problems');
+            const problems = await res.json();
+            const tbody = document.querySelector('#problemsTable tbody');
+            tbody.innerHTML = '';
+            problems.forEach((p, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                <td>${idx + 1}</td>
+                <td>${p.title}</td>
+                <td>${p.description}</td>
+                <td><button onclick="location.href='code-student.html?problem_id=${p.id}'">Làm bài</button></td>
+            `;
+                tbody.appendChild(tr);
+            });
+        }
+        loadProblems();
+    </script>
+</body>
+
+</html>

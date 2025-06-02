@@ -35,22 +35,16 @@ function renderProblem(problem) {
     document.getElementById('submitForm').style.display = '';
 }
 
-function runStudentCode(studentCode, input) {
+async function runStudentCode(studentCode, input) {
     try {
-        const nums = input.trim().split(/\s+/).map(Number);
-        let a = nums[0], b = nums[1];
-
-        let match = studentCode.match(/cout\s*<<\s*([^;]+);/);
-        if (match) {
-
-            let expr = match[1].replace(/a/g, a).replace(/b/g, b);
-
-            expr = expr.replace(/\(int\)\s*\(([^\)]+)\)/g, 'parseInt($1)');
-
-            let result = eval(expr);
-            return result.toString();
-        }
-        return '';
+        const response = await fetch('api_compile.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: studentCode, input: input })
+        });
+        const result = await response.json();
+        if (result.error) return '[Lỗi biên dịch]\n' + result.error;
+        return result.output ? result.output.trim() : '';
     } catch (e) {
         return '[Lỗi khi chạy code sinh viên]';
     }
@@ -98,7 +92,7 @@ window.onload = async function () {
 
         for (let i = 0; i < problem.testcases.length; i++) {
             const tc = problem.testcases[i];
-            let studentOutput = runStudentCode(code, tc.input);
+            let studentOutput = await runStudentCode(code, tc.input); // Thêm await
             let isCorrect = compareOutput(studentOutput, tc.expected);
             if (isCorrect) {
                 passed++;
